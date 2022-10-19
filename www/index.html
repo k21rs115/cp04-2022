@@ -38,6 +38,19 @@
         $('#btnC').click(function(e) {
             btnCClick(e);
         });
+
+        $('#btnD').click(function(e) {
+            btnDClick(e);
+        });
+        $('#btnE').click(function(e) {
+            btnEClick(e);
+        });
+        $('#btnG').click(function(e) {
+            btnEGlick(e);
+        });
+        $('#btnF').click(function(e) {
+            btnFGlick(e);
+        });
         init();
     });
     
@@ -161,6 +174,10 @@
         $('#btnA').prop('disabled', false);
         $('#btnB').prop('disabled', false);
         $('#btnC').prop('disabled', false);
+        $('#btnD').prop('disabled', false);
+        $('#btnE').prop('disabled', false);
+        $('#btnG').prop('disabled', false);
+        $('#btnF').prop('disabled', false);
         
     }
 
@@ -176,9 +193,102 @@
       var audio = new Audio();
       audio.src = "pin.wav";
       audio.play();
+      
+      //set time cố định
+      $("#minute").val(0);
+      $("#second").val(0);
 
-        
-        
+
+      period = 60* parseInt( $("#minute").val() ) + parseInt( $("#second").val());
+      $("#time").html("経過時間: 0");
+      $("#remain").html("残り時間: " + period);
+
+    }
+
+    //Set Tomodoro function
+    function tomodoro(){    
+      var canvas = $("#mycanvas")[0];
+      var ctx = canvas.getContext("2d");
+      var img = new Image();
+      img.src = "tomodoro.jpg";
+      img.onload =  function(){
+        ctx.drawImage(img, 0, 0, 300, 300);
+      };
+      var audio = new Audio();
+      audio.src = "pin.wav";
+      audio.play();
+
+      //set time cố định
+      $("#minute").val(25);
+      $("#second").val(0);
+      
+      period = 60* parseInt( $("#minute").val() ) + parseInt( $("#second").val());
+      $("#time").html("tomodoro");
+      $("#remain").html("残り時間: " + period);
+       
+    }
+    function kiukei(){    
+      var canvas = $("#mycanvas")[0];
+      var ctx = canvas.getContext("2d");
+      var img = new Image();
+      img.src = "tomodoro.jpg";
+      img.onload =  function(){
+        ctx.drawImage(img, 0, 0, 300, 300);
+      };
+      var audio = new Audio();
+      audio.src = "pin.wav";
+      audio.play();
+
+      //set time cố định
+      $("#minute").val(5);
+      $("#second").val(0);
+      
+      period = 60* parseInt( $("#minute").val() ) + parseInt( $("#second").val());
+      $("#time").html("tomodoro");
+      $("#remain").html("残り時間: " + period);
+       
+    }
+    function gyusuji(){    
+      var canvas = $("#mycanvas")[0];
+      var ctx = canvas.getContext("2d");
+      var img = new Image();
+      img.src = "gyusuji.jpeg";
+      img.onload =  function(){
+        ctx.drawImage(img, 0, 0, 300, 300);
+      };
+      var audio = new Audio();
+      audio.src = "pin.wav";
+      audio.play();
+
+      //set time cố định
+      $("#minute").val(15);
+      $("#second").val(30);
+      
+      period = 60* parseInt( $("#minute").val() ) + parseInt( $("#second").val());
+      $("#time").html("Gyusuji");
+      $("#remain").html("残り時間: " + period);
+       
+    }
+    function ramen(){    
+      var canvas = $("#mycanvas")[0];
+      var ctx = canvas.getContext("2d");
+      var img = new Image();
+      img.src = "ramen.jpg";
+      img.onload =  function(){
+        ctx.drawImage(img, 0, 0, 300, 300);
+      };
+      var audio = new Audio();
+      audio.src = "pin.wav";
+      audio.play();
+
+      //set time cố định
+      $("#minute").val(3);
+      $("#second").val(0);
+      
+      period = 60* parseInt( $("#minute").val() ) + parseInt( $("#second").val());
+      $("#time").html("Ramen");
+      $("#remain").html("残り時間: " + period);
+       
     }
     
     // ButtonAがクリックされた時の処理
@@ -202,10 +312,29 @@
     function btnCClick(e){
         alarm();
         active = false;
-        period = 60* parseInt( $("#minute").val() ) + parseInt( $("#second").val());
-        $("#time").html("経過時間: 0");
-        $("#remain").html("残り時間: " + period);
+
+        // period = 60* parseInt( $("#minute").val() ) + parseInt( $("#second").val());
+        // $("#time").html("経過時間: 0");
+        // $("#remain").html("残り時間: " + period);
         
+    }
+    function btnDClick(e){
+        tomodoro();
+        active = false;
+
+    }
+    function btnEClick(e){
+        kiukei();
+        active = false;
+
+    }
+    function btnEGlick(e){
+        gyusuji();
+        active = false;
+    }
+    function btnFGlick(e){
+        ramen();
+        active = false;
     }
     
  
@@ -214,7 +343,7 @@
         if(active){
             var time = parseInt( (new Date() - startTime)/1000 ); 
             var rest = period - time;
-            $("#time").html("経過時間: " + time);
+            //$("#time").html("経過時間: " + time);
             $("#remain").html("残り時間: " + rest);
             analog(rest);
         }
@@ -229,7 +358,7 @@
   </script>
 </head>
 <body>
-    <canvas id="mycanvas" width="200" height="200">Test</canvas>
+    <canvas id="mycanvas" width="300" height="300">Test</canvas>
 
     <div id="minuteStr">〇</div>
     <div id="secondStr">〇</div>
@@ -239,7 +368,13 @@
     <button id="btnA">Start</button>  
     <button id="btnB">Stop</button>  
     <button id="btnC">Set</button>  
+
+    <button id="btnD">Tomodoro</button>  
+    <button id="btnE">休憩</button>  
+    <button id="btnF">らーめん</button>  
+    <button id="btnG">牛すじ煮込み</button>  
+
     <input type="number" id="minute" value=0 >
-    <input type="number" id="second" value=15 >
+    <input type="number" id="second" value=0 >
 </body>
 </html>
