@@ -51,6 +51,9 @@
         $('#btnF').click(function(e) {
             btnFGlick(e);
         });
+        $('#btnTest').click(function(e) {
+            btnTestGlick(e);
+        });
         init();
     });
     
@@ -178,7 +181,7 @@
         $('#btnE').prop('disabled', false);
         $('#btnG').prop('disabled', false);
         $('#btnF').prop('disabled', false);
-        
+        $('#btnTest').prop('disabled', false);
     }
 
     // Alarmの処理
@@ -193,18 +196,33 @@
       var audio = new Audio();
       audio.src = "pin.wav";
       audio.play();
-      
-      //set time cố định
-      $("#minute").val(0);
-      $("#second").val(0);
-
 
       period = 60* parseInt( $("#minute").val() ) + parseInt( $("#second").val());
       $("#time").html("経過時間: 0");
       $("#remain").html("残り時間: " + period);
 
     }
+    // Reset
+    function reset(){
+      var canvas = $("#mycanvas")[0];
+      var ctx = canvas.getContext("2d");
+      var img = new Image();
+      img.src = "ksuisbg.gif";
+      img.onload =  function(){
+        ctx.drawImage(img, 0, 0, 300, 300);
+      };
+      var audio = new Audio();
+      audio.src = "pin.wav";
+      audio.play();
 
+      $("#minute").val(0);
+      $("#second").val(0);
+
+      period = 60* parseInt( $("#minute").val() ) + parseInt( $("#second").val());
+      $("#time").html("経過時間: 0");
+      $("#remain").html("残り時間: " + period);
+
+    }
     //Set Tomodoro function
     function tomodoro(){    
       var canvas = $("#mycanvas")[0];
@@ -335,6 +353,10 @@
     function btnFGlick(e){
         ramen();
         active = false;
+    }    
+    function btnTestGlick(e){
+        reset();
+        active = false;
     }
     
  
@@ -373,7 +395,7 @@
     <button id="btnE">休憩</button>  
     <button id="btnF">らーめん</button>  
     <button id="btnG">牛すじ煮込み</button> 
-    <button id="btnTest">TTest</button>
+    <button id="btnTest">Reset</button>
 
     <input type="number" id="minute" value=0 >
     <input type="number" id="second" value=0 >
