@@ -218,6 +218,7 @@
         color: #ffffff;
         text-align: center;
         transition: all 0.2s;
+        position:absolute; top:600px; left:37%; width:28%; height:40px; 
     }
     #btnTest:hover{
         color: #000000;
